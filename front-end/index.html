@@ -40,7 +40,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Add Alert</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Find Keywords</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Upload</a>
@@ -61,14 +61,18 @@
       </a>
       <h1 class="text-uppercase mb-0">Bi-Tech Automation</h1>
       <hr class="star-light">
-      <h2 class="font-weight-light mb-0">This System will automate the FA system developed for SJSU Research Foundation.</h2>
+      <h2 class="font-weight-light mb-0">This system will automate the keyword fetching process 
+        from funding solicitation for </h2>
+        <h2 class="font-weight-light mb-0">
+
+        San Jose State University Research Foundation.</h2>
     </div>
   </header>
 
   <!-- Portfolio Grid Section -->
   <section class="portfolio" id="portfolio">
     <div class="container">
-      <h2 class="text-center text-uppercase text-secondary mb-0">Alert Details</h2>
+      <h2 class="text-center text-uppercase text-secondary mb-0">Solicitation Details</h2>
       <hr class="star-dark mb-5">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -78,14 +82,14 @@
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label>Title</label>
-                <input class="form-control" id="title" type="text" placeholder="Title" required="required" data-validation-required-message="Please enter your name.">
+                <input class="form-control" id="title" type="text" placeholder="Title" required="required" data-validation-required-message="Please enter title.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label>Description</label>
-                <textarea class="form-control" id="description" rows="5" placeholder="Description" required="required" data-validation-required-message="Please enter a message."></textarea>
+                <textarea class="form-control" id="description" rows="5" placeholder="Description" required="required" data-validation-required-message="Please enter description"></textarea>
                 <p class="help-block text-danger"></p>
               </div>
             </div>
@@ -93,15 +97,23 @@
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label>Background Information</label>
                 <textarea class="form-control" id="backgroundInformation" rows="5" placeholder="Background Information" required="required"
-                  data-validation-required-message="Please enter a message."></textarea>
+                  data-validation-required-message="Please enter Background Information."></textarea>
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <br>
             <div id="success"></div>
+
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+              <button type="submit" class="btn btn-primary btn-xl" id="findKeyword">Send</button>
             </div>
+            <hr/>
+            <div id = "keywordDiv"  style="visibility: hidden">
+                <h2 class="text-center text-uppercase text-secondary mb-0">Keywords</h2>
+                <hr class="star-dark mb-5">
+                <div id="keywords"></div>    
+            </div>
+            
           </form>
         </div>
       </div>
@@ -119,12 +131,12 @@
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label>Keyword File</label>
-                <input class="form-control" id="name" type="file" placeholder="Keyword" required="required" data-validation-required-message="Please enter your name.">
+                <input class="form-control" id="file" type="file" placeholder="Keyword" required="required" data-validation-required-message="Please enter your name.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <br>
-            <div id="success"></div>
+            <div id="fileSuccess"></div>
             <div class="form-group">
               <div class="text-center mt-4">
                 <a class="btn btn-xl btn-outline-light" href="#">
