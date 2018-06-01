@@ -4,8 +4,12 @@
   "description": "BiTech Backend RESTApis",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "body-parser": "^1.15.2"
+    "node-rake": "^1.0.1",
+    "pdf-text-extract": "^1.5.0",
+    "pdf-to-text": "0.0.6",
+    "pdfreader": "^0.2.5"
   },
   "scripts": {
     "start": "node server.js"
