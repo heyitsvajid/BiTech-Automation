@@ -2,6 +2,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express(); 
+var Util = require('./utility');
+
 
 // Body Parser Middleware
 app.use(bodyParser.json()); 
@@ -21,31 +23,6 @@ app.use(function (req, res, next) {
     console.log("BiTech APIs running on port", port);
  });
 
-
-//Function to connect to database and execute query
-var  executeQuery = function(res, query){             
-     sql.connect(dbConfig, function (err) {
-         if (err) {   
-                     console.log("Error while connecting database :- " + err);
-                     res.send(err);
-                  }
-                  else {
-                         // create Request object
-                         var request = new sql.Request();
-                         // query to the database
-                         request.query(query, function (err, res) {
-                           if (err) {
-                                      console.log("Error while querying database :- " + err);
-                                      res.send(err);
-                                     }
-                                     else {
-                                       res.send(res);
-                                            }
-                               });
-                       }
-      });           
-}
-
 //GET API
 app.get("/api/user", function(req , res){
                 var query = "select * from [user]";
@@ -54,7 +31,47 @@ app.get("/api/user", function(req , res){
 
 //POST findKeywords API
  app.post("/findKeywords", function(req , res){
-    res.send("Hello POST");
+    console.log("findKeywords API Called")
+
+    console.log("Request Parameters")
+    console.log(req.body)
+    
+        
+    let title = req.body.title;
+    let description = req.body.description;
+    let bgInformation = req.body.bgInformation;
+    
+    let text = title + description + bgInformation;
+    console.log("Final Text :")
+    console.log(text)
+
+    if(text){
+        let pdfKeywords;
+        Util.readKeyword(function(result){
+            pdfKeywords= result;
+            let docKeywords;
+            Util.findKeyword(text,function(textKeywords){
+                docKeywords=textKeywords;
+                Util.matchKeyword(docKeywords,pdfKeywords,function(matchedKeywords){
+                    res.json({
+                        success:true,
+                        error:false,
+                        keywords:matchedKeywords
+                    });                                
+                    
+                });
+
+            });
+        });
+    }else{
+        res.json({
+            success:false,
+            error:true,
+            message:"Provide text"
+        });
+    }
+
+
 });
 
 //PUT API
