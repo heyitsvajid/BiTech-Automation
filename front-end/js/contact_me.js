@@ -41,7 +41,7 @@ $(function() {
           $('#contactForm').trigger("reset");
           let finalString=''
           data.keywords.forEach(keyword => {
-            let keywordDiv = "<div class='chip'>"+keyword+"</div>"
+            let keywordDiv = "<div class='chip'>"+keyword+"<span class='closebtn' onclick='removeKeyword(this)'>&times;</span></div>"
             finalString=finalString+keywordDiv
           });
           $('#keywords').html(finalString);
@@ -80,3 +80,41 @@ $(function() {
 $('#name').focus(function() {
   $('#success').html('');
 });
+
+function uploadFile(){
+  var file = document.getElementById('keywordFile').files[0]; //Files[0] = 1st file
+  var formData = new FormData();
+
+  // HTML file input, chosen by user
+  formData.append("file", file);
+  
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    console.log(this.response)
+    $('#fileSuccess').html("<div class='alert alert-success'>");
+    $('#fileSuccess > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+      .append("</button>");
+    $('#fileSuccess > .alert-success')
+      .append("<strong> File Uploaded Successfully. </strong>");
+    $('#fileSuccess > .alert-success')
+      .append('</div>');
+
+  }
+  if(this.readyState == 4 && this.status != 200){
+              // Fail message
+              $('#fileSuccess').html("<div class='alert alert-danger'>");
+              $('#fileSuccess > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                .append("</button>");
+              $('#fileSuccess > .alert-danger').append($("<strong>").text("Sorry, it seems that server is not responding. Please try again later!"));
+              $('#fileSuccess > .alert-danger').append('</div>');
+              //clear all fields
+  }
+};
+  request.open("PUT", "http://localhost:8081/uploadFile");
+  request.send(formData);
+}
+
+function removeKeyword(e){
+  e.parentElement.style.display='none'
+}
