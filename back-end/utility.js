@@ -22,7 +22,7 @@ matchKeyword : function(docKeywords,pdfKeywords,callback){
   for(let i=0;i<docKeywords.length;i++){
       keys.forEach(key => {
         if(key.includes(docKeywords[i].toLowerCase())){
-          matchedKeywords.push(key)
+          matchedKeywords.push(pdfKeywords[key]+" : "+key)
         }
       });
   }
