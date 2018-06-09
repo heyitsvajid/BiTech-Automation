@@ -11,7 +11,7 @@ The main objective is extraction of keywords form the funding opportunity solici
 
 
 ## System Architecture
-![Architecture](/architecture.jpg)
+![Architecture](/architechure.jpg)
 
 
 ### Technology stack
