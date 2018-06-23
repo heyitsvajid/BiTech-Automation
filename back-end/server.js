@@ -5,8 +5,11 @@ var app = express();
 var Util = require('./utility');
 
 
+app.use(express.static(__dirname + '/../front-end'));
+
 // Body Parser Middleware
 app.use(bodyParser.json());
+
 
 //CORS Middleware
 app.use(function (req, res, next) {
@@ -23,10 +26,11 @@ var server = app.listen(process.env.PORT || 8081, function () {
     console.log("BiTech APIs running on port", port);
 });
 
+var path = require('path');
+
 //GET API
-app.get("/api/user", function (req, res) {
-    var query = "select * from [user]";
-    res.send("Hello Get");
+app.get("/bitech", function (req, res) {
+    res.sendFile(path.join(__dirname + '/../front-end/index.html'));
 });
 
 //POST findKeywords API
